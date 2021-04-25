@@ -1,24 +1,28 @@
-name: Deploy
+name: github pages
 
 on:
   push:
     branches:
-      - "main"
+      - main # Set a branch name to trigger deployment
+
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  deploy:
+    runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
-      - name: Use Node.js
-        uses: actions/setup-node@v1
         with:
-          node-version: 12.x
-      - name: yarn install
-        run: |
-          yarn install
-      - name: Build App
-        run: yarn run build
-      - name: App Deploy
+          submodules: true # Fetch Hugo themes (true OR recursive)
+          fetch-depth: 0 # Fetch all history for .GitInfo and .Lastmod
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: "0.79.1"
+
+      - name: Build
+        run: hugo --minify
+
+      - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
