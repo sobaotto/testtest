@@ -20,7 +20,7 @@ jobs:
           hugo-version: "0.79.1"
 
       - name: Help
-        run: hugo help new
+        run: hugo new site quickstart
 
       - name: Build
         run: hugo --minify
