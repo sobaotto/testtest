@@ -41,6 +41,7 @@ function ItemList(props) {
         );
       }
     }
+    return undefined;
   });
 
   return <ul>{todoElements}</ul>;
