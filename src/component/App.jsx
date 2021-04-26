@@ -100,7 +100,7 @@ function App() {
   }
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <React.Fragment>
         <Route path="/" component={Header} />
         <Route exact path="/">
